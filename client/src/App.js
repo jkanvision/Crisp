@@ -10,6 +10,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Auth from './utils/auth';
 
+var PropTypes = require('prop-types');
+
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 /// IMPORT PAGES ///
 import Landing from './pages/Landing';
 import Signup from './pages/Signup';
