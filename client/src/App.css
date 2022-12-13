@@ -1,1 +1,10 @@
+:root {
+    --bg: #829D93;
+    --primary: #ADC2B5;
+    --light: #F0F5F2;
+}
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
