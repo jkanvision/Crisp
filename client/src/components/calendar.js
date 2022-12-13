@@ -7,6 +7,8 @@ import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import './calendar.css'
+
 
 
 const locales = { "en-US": require("date-fns/locale/en-US")
@@ -51,11 +53,12 @@ const events = [
       
  
   return (
-    <div className="App">
+    <>
+    <div className="quick_style">
         <h1>Crisp</h1>
         <h2>Add New Event</h2>
-        <div>
-        <input type='text' placeholder='Add Event' style={{width: '20%', marginRight: '10px'}}
+       <div>
+        <input type='text' placeholder='Add Event' style={{width: '20%', marginRight: '10px',}}
         value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
         />
         <DatePicker placeholderText='Start Date' style={{marginRight: '10px'}}
@@ -64,16 +67,17 @@ const events = [
         <DatePicker placeholderText='End Date' 
         selected={newEvent.end} onChange={(end) => setNewEvent({...newEvent, end})}
         />
-        <button  placeholder='Add Event' style={{marginTop: '50px'}} onClick={handleAddEvent}></button>
+        <button type='text' placeholder='Add Event' style={{marginTop: '10px', height: '20px', width: '5%'}} onClick={handleAddEvent}></button>
       </div>
-      <Calendar
+    </div>
+    <Calendar
         localizer={localizer}
         startAccessor="start"
         events={allEvents}
         endAccessor="end"
         style={{ height: 1000 }}
       />
-    </div>
+    </>
   );
   
 }
