@@ -18,6 +18,7 @@ import Dashboard from './pages/Dashboard';
 
 /// IMPORT COMPONENTS ///
 import ProtectRoute from './components/ProtectRoute';
+import  Calendar  from './components/calendar';
 
 import './App.css';
 
@@ -56,6 +57,7 @@ function App() {
           />
         </Routes>
       </Router>
+      <Calendar />
     </ApolloProvider>
   );
 }
