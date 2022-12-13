@@ -14,11 +14,11 @@ import Auth from './utils/auth';
 import Landing from './pages/Landing';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+
 
 /// IMPORT COMPONENTS ///
 import ProtectRoute from './components/ProtectRoute';
-import  Calendar  from './components/calendar';
+import  CalendarComp  from './components/calendar';
 
 import './App.css';
 
@@ -52,12 +52,11 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route
-            path='dashboard/:userId'
-            element={Auth.loggedIn() ? <Dashboard /> : <ProtectRoute />}
+            path='calendar/:userId'
+            element={Auth.loggedIn() ? <CalendarComp /> : <ProtectRoute />}
           />
         </Routes>
       </Router>
-      <Calendar />
     </ApolloProvider>
   );
 }
