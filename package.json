@@ -1,7 +1,7 @@
 {
-  "name": "mern-boiler",
+  "name": "crisp",
   "version": "1.0.0",
-  "description": "",
+  "description": "the user-friendly scheduler",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -10,8 +10,8 @@
     "build": "cd client && npm run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Noah Stafford, Ian Binstock, Jack Kane",
+  "license": "MIT",
   "devDependencies": {
     "concurrently": "^5.1.0"
   },
