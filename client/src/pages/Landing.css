@@ -1,22 +1,87 @@
-:root {
-    --bg: #829D93;
-    --primary: #ADC2B5;
-    --light: #F0F5F2;
-}
-
 .landing-bg {
+    /* colors */
+    background-color: var(--bg);
+    /* sizing */
     height: 100vh;
     width: 100vw;
-    
-    background-color: var(--bg);
+    /* misc */
     background-image: url("../components/ProtectRoute/assets/images/crisp_landing.jpg");
     background-size: cover;
+    background-position: center;
 }
 
 .landing-border {
-    height: calc(100vh - 10vh);
-    width: calc(100vw - 20vh);
-    border: solid 5vh var(--bg);
-    border-left: solid 10vh var(--bg);
-    border-right: solid 10vh var(--bg);
+    /* sizing */
+    height: calc(100vh - max(6vw, 6vh));
+    width: calc(100vw - max(12vw, 12vh));
+    border: solid max(3vw, 3vh) var(--bg);
+    border-left: solid max(6vw, 6vh) var(--bg);
+    border-right: solid max(6vw, 6vh) var(--bg);
+    /* alignment */
+    display: flex;
+    justify-content: center;
+    /* positioning */
+    position: relative;
+    align-items: center;
+}
+
+.landing-bottom {
+    /* sizing */
+    width: auto;
+    height: 80px;
+    /* alignment */
+    display: flex;
+    justify-content: center;
+    /* positioning */
+    position: absolute;
+    bottom: calc(-1 * max(3vw, 3vh));
+    gap: 3vw;
+}
+
+.landing-button {
+    /* colors */
+    background-color: var(--bg);
+    /* sizing */
+    width: max(20vw, 200px);
+    height: 80px;
+    /* alignment */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* misc */
+    border-radius: 5px 5px 0 0;
+}
+
+a:link, a:visited {
+    /* colors */
+    color: var(--light);
+    /* sizing */
+    width: inherit;
+    height: inherit;
+    padding: 0;
+    /* alignment */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* misc */
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+}
+
+a:hover, a:active {
+    /* colors */
+    color: var(--primary);
+}
+
+h1 {
+    font-size: 6rem;
+    font-weight: lighter;
+    color: var(--dark);
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bolder;
 }
