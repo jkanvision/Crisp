@@ -7,12 +7,19 @@ const Landing = () => {
   return (
     <div className="landing-bg">
       <div className="landing-border">
-        <Link to='/signup' style={{ textDecoration: 'none' }}>
-          <h1>Sign Up now</h1>
-        </Link>
-        <Link to='/login' style={{ textDecoration: 'none' }}>
-          <h1>Login now</h1>
-        </Link>
+        <h1>Crisp</h1>
+        <div className="landing-bottom">
+          <div className="landing-button">
+            <Link to='/login' style={{ textDecoration: 'none' }}>
+              <h2>Log In</h2>
+            </Link>
+          </div>
+          <div className="landing-button">
+            <Link to='/signup' style={{ textDecoration: 'none' }}>
+              <h2>Sign Up</h2>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   )
