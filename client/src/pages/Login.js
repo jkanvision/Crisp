@@ -47,24 +47,29 @@ const Login = (props) => {
       {data ? (
         <p>Successfully logged in! You may now head{' '}<Link to='/'>back to the hompage.</Link></p>
       ) : (
-        <div>
-          <h2>Login</h2>
+        <div className="login-bg">
           <form onSubmit={handleFormSubmit}>
-            <input
-              placeholder='Your email'
-              name='email'
-              type='email'
-              value={formState.email}
-              onChange={handleChange}
-            />
-            <input
-              placeholde='Your password'
-              name='password'
-              type='password'
-              value={formState.password}
-              onChange={handleChange}
-            />
-            <button type='submit'>Login</button>
+            <div>
+              <h2>Email</h2>
+              <input
+                placeholder=''
+                name='email'
+                type='email'
+                value={formState.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <h2>Password</h2>
+              <input
+                placeholde=''
+                name='password'
+                type='password'
+                value={formState.password}
+                onChange={handleChange}
+              />
+            </div>
+            <button type='submit'>Log in</button>
           </form>
         </div>
       )}
