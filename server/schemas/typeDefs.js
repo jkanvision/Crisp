@@ -5,6 +5,16 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
+    password: String!
+    events: [Event]
+  }
+
+  type Event {
+    _id: ID!
+    title: String
+    start: String
+    end: String
+    createdAt: String
   }
 
   type Auth {
