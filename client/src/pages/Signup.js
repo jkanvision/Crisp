@@ -6,6 +6,8 @@ import { ADD_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
+import './Login.css';
+
 const Signup = () => {
 
   const [formState, setFormState] = useState({
@@ -45,38 +47,44 @@ const Signup = () => {
       {data ? (
         <p variant='subtitle1'>Successfully created an account. You may now head{' '}<Link to='/'>back to the hompage.</Link></p>
       ) : (
-        <div>
-          <h2>Sign Up</h2>
+        <div className="login-bg">
           <form onSubmit={handleFormSubmit}>
-            <input
-              placeholder='Username'
-              name='username'
-              type='text'
-              value={formState.username}
-              onChange={handleChange}
-            />
-            <input
-              placeholder='Email'
-              name='email'
-              type='text'
-              value={formState.email}
-              onChange={handleChange}
-            />
-            <input
-              placeholder='Password'
-              name='password'
-              type='password'
-              value={formState.password}
-              onChange={handleChange}
-            />
-            <button type='submit'>Sign Up</button>
+            <div>
+              <h2>Username</h2>
+              <input
+                placeholder=''
+                name='username'
+                type='text'
+                value={formState.username}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <h2>Email</h2>
+              <input
+                placeholder=''
+                name='email'
+                type='text'
+                value={formState.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <h2>Password</h2>
+              <input
+                placeholder=''
+                name='password'
+                type='password'
+                value={formState.password}
+                onChange={handleChange}
+              />
+            </div>
+            <button style={{marginTop: "8.25rem"}} type='submit'>Sign Up</button>
           </form>
         </div>
       )}
       {error && (
-        <div>
-          {error.message}
-        </div>
+        <div>{error.message}</div>
       )}
     </main>
   );

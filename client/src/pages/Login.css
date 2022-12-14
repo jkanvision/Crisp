@@ -1,0 +1,74 @@
+.login-bg {
+    /* colors */
+    background-color: var(--bg);
+    /* sizing */
+    height: 100vh;
+    width: 100vw;
+    /* alignment */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    position: relative;
+}
+
+.login-bg form > div {
+    /* alignment */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* sizing */
+    width: 600px;
+    margin: auto;
+}
+
+.login-bg form > div > h2 {
+    /* sizing */
+    padding-top: 10px;
+    margin: 5px 0;
+    /* misc */
+    color: var(--darker);
+    font-size: 2.5rem;
+    font-weight: lighter;
+}
+
+.login-bg input {
+    /* colors */
+    background-color: var(--primary);
+    /* sizing */
+    height: 40px;
+    width: 350px;
+    /* misc */
+    border: solid 3px;
+    border-radius: 5px;
+    border-color: var(--bg) var(--dark) var(--dark) var(--bg);
+    text-indent: 10px;
+    font-size: 1.25rem;
+    font-family: 'Nexa', sans-serif;
+    font-weight: lighter;
+    padding-top: 5px;
+}
+
+.login-bg input:focus {
+    outline: none;
+}
+
+.login-bg button {
+    /* colors */
+    color: var(--dark);
+    background-color: var(--light_50);
+    /* alignment */
+    position: absolute;
+    top: 50%;
+    margin-left: 51vw;
+    margin-top: 7rem;
+    /* misc */
+    border: solid 3px;
+    border-radius: 5px;
+    border-color: var(--light) var(--bg) var(--bg) var(--light);
+    font-size: 2.5rem;
+    height: 70px;
+    width: 200px;
+    cursor: pointer;
+}
