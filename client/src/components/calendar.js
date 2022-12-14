@@ -8,6 +8,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './calendar.css'
+import AuthService from '../utils/auth';
 
 
 
@@ -55,9 +56,10 @@ const events = [
   return (
     <>
     <div className="quick_style">
-        <h1>Crisp</h1>
-        <h2>Add New Event</h2>
-       <div>
+      <button onClick={AuthService.logout}>Logout</button>
+      <h1>Crisp</h1>
+      <h2>Add New Event</h2>
+      <div>
         <input type='text' placeholder='Add Event' style={{width: '20%', marginRight: '10px',}}
         value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
         />
