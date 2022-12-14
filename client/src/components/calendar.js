@@ -27,8 +27,8 @@ const events = [
     {
         title: "Project 3",
         allDay: true,
-        start: new Date(2022, 11, 13),
-        end: new Date(2022, 11, 19),
+        start: "Mon Dec 19 2022 00:00:00 GMT-0500 (Eastern Standard Time)",
+        end: "Mon Dec 20 2022 00:00:00 GMT-0500 (Eastern Standard Time)",
     },
     {
         title: "Vacation",
