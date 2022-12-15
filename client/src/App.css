@@ -1,13 +1,18 @@
 @import url('https://fonts.cdnfonts.com/css/nexa-bold');
 
 :root {
+    --highlight: #addfd0;
     --darker: #496b64;
     --dark: #5a7771;
     --bg: #829D93;
     --primary: #ADC2B5;
     --light: #F0F5F2;
-    /* --primary_50: rgba(173, 194, 181, 0.5); */
-    --light_50: rgba(240, 245, 242, 0.5);
+    --primary_50: rgba(177, 208, 199, 0.5);
+    --light_50: rgba(223, 245, 233, 0.5);
+}
+
+* {
+    font-family: 'Nexa', sans-serif;
 }
 
 html, body {
