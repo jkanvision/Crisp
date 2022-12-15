@@ -1,45 +1,31 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
-query user($userId: ID!) {
-  user(userId: $userId) {
+query user {
+  user {
     _id
-    username
     email
-    courseCount
-    courses {
+    events {
       _id
-      courseName
-      startDate
-      endDate
-      description
-      instructor
+      createdAt
+      end
+      start
+      title
     }
+    username
   }
 }
+
 `;
 
-export const QUERY_COURSE = gql`
-  query course($courseId: ID!) {
-  course(courseId: $courseId) {
+export const QUERY_EVENT = gql`
+query event($eventId: ID!) {
+  event(eventId: $eventId) {
     _id
-    courseName
-    startDate
-    endDate
-    description
-    instructor
-    students {
-      _id
-      firstName
-      lastName
-      course
-      grades {
-        _id
-        assignmentName
-        grade
-      }
-    }
-    studentCount
+    createdAt
+    end
+    start
+    title
   }
 }
 `;
