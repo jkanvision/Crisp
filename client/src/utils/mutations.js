@@ -13,52 +13,58 @@ export const ADD_USER = gql`
 }
 `;
 
-export const ADD_COURSE = gql`
-  mutation addCourse($courseName: String!, $startDate: String!, $endDate: String!, $description: String!) {
-  addCourse(courseName: $courseName, startDate: $startDate, endDate: $endDate, description: $description) {
+export const ADD_EVENT = gql`
+mutation addEvent($title: String, $start: String, $end: String) {
+  addEvent(title: $title, start: $start, end: $end) {
     _id
-    courseName
-    startDate
-    endDate
-    description
-    instructor
+    createdAt
+    end
+    start
+    title
   }
 }
 `;
 
-export const ADD_STUDENT = gql`
-  mutation addStudent($firstName: String!, $lastName: String!, $course: String!) {
-  addStudent(firstName: $firstName, lastName: $lastName, course: $course) {
+// export const ADD_STUDENT = gql`
+//   mutation addStudent($firstName: String!, $lastName: String!, $course: String!) {
+//   addStudent(firstName: $firstName, lastName: $lastName, course: $course) {
+//     _id
+//     firstName
+//     lastName
+//     course
+//   }
+// }
+// `;
+
+// export const ADD_ASSIGNMENT = gql`
+//   mutation addAssignment($assignmentName: String!, $grade: Int, $studentId: String) {
+//   addAssignment(assignmentName: $assignmentName, grade: $grade, studentId: $studentId) {
+//     assignmentName
+//     grade
+//   }
+// }
+// `;
+
+export const UPDATE_EVENT = gql`
+mutation updateEvent($eventId: ID!, $title: String, $start: String, $end: String) {
+  updateEvent(eventId: $eventId, title: $title, start: $start, end: $end) {
     _id
-    firstName
-    lastName
-    course
+    createdAt
+    end
+    start
+    title
   }
 }
 `;
 
-export const ADD_ASSIGNMENT = gql`
-  mutation addAssignment($assignmentName: String!, $grade: Int, $studentId: String) {
-  addAssignment(assignmentName: $assignmentName, grade: $grade, studentId: $studentId) {
-    assignmentName
-    grade
-  }
-}
-`;
-
-export const UPDATE_ASSIGNMENT = gql`
-  mutation updateAssignment($assignmentId: String!, $newGrade: Int) {
-  updateAssignment(assignmentId: $assignmentId, newGrade: $newGrade) {
-    assignmentName
-    grade
-  }
-}
-`;
-
-export const DELETE_ASSIGNMENT = gql`
-  mutation deleteAssignment($assignmentId: String!, $studentId: String) {
-  deleteAssignment(assignmentId: $assignmentId, studentId: $studentId) {
-    course
+export const DELETE_EVENT = gql`
+mutation removeEvent($eventId: ID!) {
+  removeEvent(eventId: $eventId) {
+    _id
+    createdAt
+    end
+    start
+    title
   }
 }
 `;
