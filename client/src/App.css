@@ -1,7 +1,7 @@
 @import url('https://fonts.cdnfonts.com/css/nexa-bold');
 
 :root {
-    --highlight: #addfd0;
+    --highlight: #addfc6; /* #addfd0 */
     --darker: #496b64;
     --dark: #5a7771;
     --bg: #829D93;
