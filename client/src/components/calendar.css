@@ -3,3 +3,178 @@
     align-items: center;
     flex-direction: column
 }
+
+body {
+    background-color: var(--bg);
+    color: var(--darker);
+}
+
+.rbc-calendar {
+    margin: 0 10%;
+}
+
+.rbc-toolbar {
+    margin-bottom: 25px;
+}
+
+/* MONTH: All border elements */
+.rbc-month-view {
+    border: 0;
+}
+.rbc-month-row {
+    border: 2px solid var(--primary);
+}
+.rbc-header {
+    border-bottom: 0;
+}
+.rbc-toolbar button {
+    border: 2px solid var(--primary);
+}
+/* .rbc-day-bg + .rbc-day-bg {
+    border-left: 2px solid var(--primary_50);
+} */
+.rbc-header + .rbc-header {
+    border-left: 0;
+}
+.rbc-month-row + .rbc-month-row {
+    border-top: 0;
+}
+
+/* MONTH: Color overwriting */
+.rbc-today {
+    background-color: var(--primary_50);
+}
+.rbc-off-range-bg {
+    background-color: var(--dark);
+}
+.rbc-off-range {
+    color: var(--dark);
+}
+.rbc-date-cell {
+    background-color: var(--primary_50);
+}
+.rbc-toolbar button:active:hover, .rbc-toolbar button:active:focus, .rbc-toolbar button.rbc-active:hover, .rbc-toolbar button.rbc-active:focus {
+    background-color: var(--light_50);
+    border-color: var(--primary_50);
+}
+.rbc-toolbar button:active, .rbc-toolbar button.rbc-active {
+    background-color: var(--light_50);
+    box-shadow: inset 0 3px 5px rgb(90 119 113 / 50%);
+    border-color: var(--primary_50);
+}
+.rbc-toolbar button:active:focus, .rbc-toolbar button.rbc-active:focus {
+    background-color: var(--light_50);
+    border-color: var(--primary_50);
+}
+.rbc-toolbar button:hover, .rbc-toolbar button:focus {
+    background-color: var(--light_50);
+    border-color: var(--primary_50);
+}
+.rbc-toolbar {
+    color: var(--dark);
+}
+
+/* MONTH: Styling */
+.rbc-month-header {
+    padding: 10px 0;
+}
+.rbc-event {
+    background-color: var(--highlight);
+    color: var(--darker);
+    padding-top: 5px;
+    border: 3px solid;
+    border-color: var(--light_50) var(--dark) var(--dark) var(--light_50);
+}
+.rbc-event-continues-after {
+    border-right: 0;
+}
+.rbc-event-continues-prior {
+    border-left: 0;
+}
+.rbc-row:first-child {
+    margin-bottom: 5px;
+}
+.rbc-row-segment {
+    padding: 0;
+}
+
+/* WEEK: All border elements */
+.rbc-time-view {
+    border: 0;
+}
+.rbc-time-header.rbc-overflowing {
+    border: 0
+}
+.rbc-time-header-content {
+    border: 0;
+}
+.rbc-day-bg + .rbc-day-bg {
+    border: 0;
+}
+.rbc-time-content {
+    border: 0;
+}
+.rbc-timeslot-group {
+    border: 0;
+}
+.rbc-time-content > * + * > * {
+    border-left: 0;
+}
+/* Left border */
+.rbc-time-content > .rbc-day-slot:nth-child(2) {
+    border-left: 2px solid var(--primary_50);
+}
+.rbc-day-slot .rbc-time-slot {
+    border: 0;
+}
+/* Top border + Hour divisions */
+.rbc-day-slot .rbc-timeslot-group .rbc-time-slot:first-child {
+    border-top: 2px solid var(--primary_50);
+}
+.rbc-time-content > * + * > .rbc-timeslot-group:nth-child(24) {
+    border-bottom: 2px solid var(--primary_50);
+}
+/* WEEK: Color overwriting */
+
+/* WEEK: Styling */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--bg); 
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--dark); 
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--darker); 
+}
+
+/* .rbc-time-view .rbc-today {
+    background-color: var(--bg);
+} */
+
+
+/* Agenda */
+.rbc-agenda-view > table.rbc-agenda-table {
+    border: 0;
+}
+.rbc-agenda-view > * > table.rbc-agenda-table {
+    border: 2px solid var(--light_50);
+}
+.rbc-agenda-view table.rbc-agenda-table .rbc-agenda-time-cell {
+    background-color: var(--primary_50);
+}
+.rbc-agenda-view table.rbc-agenda-table thead > tr > th {
+    border: 0;
+}
+.rbc-agenda-view table.rbc-agenda-table tbody > tr + tr {
+    border: 0;
+}
+.rbc-agenda-view table.rbc-agenda-table tbody > tr > td + td {
+    border: 0;
+}
