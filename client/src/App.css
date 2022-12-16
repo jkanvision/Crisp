@@ -23,3 +23,15 @@ html, body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Nexa', sans-serif;
 }
+
+/* Chrome autofill overwrite */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px var(--primary) inset !important;
+}
+
+input:-webkit-autofill{
+    -webkit-text-fill-color: var(--dark) !important;
+}
