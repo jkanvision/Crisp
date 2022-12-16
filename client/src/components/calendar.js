@@ -7,6 +7,7 @@ import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
 import './calendar.css'
 import AuthService from '../utils/auth'
 import { gql, useMutation, useQuery } from '@apollo/client';
@@ -15,6 +16,10 @@ import { QUERY_EVENT, QUERY_USER } from "../utils/queries";
 
 
 
+
+
+import './calendar.css';
+import AuthService from '../utils/auth';
 
 
 
