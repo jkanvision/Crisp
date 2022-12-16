@@ -18,8 +18,7 @@ import { QUERY_EVENT, QUERY_USER } from "../utils/queries";
 
 
 
-import './calendar.css';
-import AuthService from '../utils/auth';
+
 
 
 
