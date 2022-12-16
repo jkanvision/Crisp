@@ -2,6 +2,7 @@
 
 :root {
     --highlight: #addfc6; /* #addfd0 */
+    --highlight_60: rgba(173, 223, 198, 0.6);
     --darker: #496b64;
     --dark: #5a7771;
     --bg: #829D93;
