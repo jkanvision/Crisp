@@ -8,7 +8,14 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './calendar.css'
-import AuthService from '../utils/auth';
+import AuthService from '../utils/auth'
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { ADD_EVENT, UPDATE_EVENT, DELETE_EVENT, } from "../utils/mutations";
+import { QUERY_EVENT, QUERY_USER } from "../utils/queries";
+
+
+
+
 
 
 
@@ -23,7 +30,7 @@ const localizer = dateFnsLocalizer({
   locales
 });
 
-const events = [
+const hardevents = [
     {
         title: "Project 3",
         allDay: true,
@@ -46,12 +53,34 @@ const events = [
 
  function CalendarComp() {
     const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
-    const [allEvents, setAllEvents] = useState(events);
-    console.log(allEvents)
-    function handleAddEvent() {
-        setAllEvents([...allEvents, newEvent])
+    const [allEvents, setAllEvents] = useState(hardevents);
+    const [addEvent, { error }] = useMutation(ADD_EVENT);
+    /// QUERY COURSE ///
+  const { loading, data } = useQuery(QUERY_USER);
+  const events = data?.user.events;
+    console.log(data?.user.events)
+    async function handleAddEvent() {
+        // setAllEvents([...allEvents, newEvent])
+        try {
+          const data = await addEvent({
+            variables: {
+               title: newEvent.title,
+               start: newEvent.start, 
+               end: newEvent.end, 
+              },
+              refetchQueries: [
+                {
+                  query: QUERY_USER,
+                },
+              ],
+          });
+          setNewEvent({title: "", start: "", end: "" })
+        } catch (err) {
+          console.error(err);
+        }
       }
       
+
  
   return (
     <>
@@ -75,7 +104,7 @@ const events = [
     <Calendar
         localizer={localizer}
         startAccessor="start"
-        events={allEvents}
+        events={events}
         endAccessor="end"
         style={{ height: 1000 }}
       />
