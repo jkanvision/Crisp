@@ -82,22 +82,35 @@ function card_temp(title = "") {
   `;
 };
 
+let storeCard = "";
+let storeEvents = [];
+
+window.onresize = function() {
+  if (document.querySelector('.card')) {
+    document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
+  }
+}
+
 // When the user clicks on the button, toggle between hiding and showing the dropdown content
 window.onclick = function(event) {
   if (event.target.matches('.plusBtn')) {
     document.querySelector('.eventDropdown').classList.toggle("show");
-  } else if (event.target.matches('.rbc-event-content') && event.target.innerText === "Vacation") {
-    let copy = document.querySelector('[title="Vacation"]');
-    copy.insertAdjacentHTML('afterend', card_temp("Vacation"));
-    document.querySelector('.card').style.width = `${copy.offsetWidth}px`;
+  } else if (event.target.matches('.rbc-event-content') && event.target.innerText === "event") {
+    storeCard = document.querySelector('[title="event"]');
+    storeCard.insertAdjacentHTML('afterend', card_temp("event"));
+    document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
   } else {
-    // document.querySelector('.card').style.display = "none";
+    if (document.querySelector('.card')) {
+      document.querySelector('.card').style.display = "none";
+    }
+    console.log(storeEvents);
   }
 }
 
 function CalendarComp() {
   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
   const [allEvents, setAllEvents] = useState(events);
+  storeEvents = events;
   console.log(allEvents)
   function handleAddEvent() {
     setAllEvents([...allEvents, newEvent])
