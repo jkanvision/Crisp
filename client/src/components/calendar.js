@@ -14,15 +14,6 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { ADD_EVENT, UPDATE_EVENT, DELETE_EVENT, } from "../utils/mutations";
 import { QUERY_EVENT, QUERY_USER } from "../utils/queries";
 
-
-
-
-
-
-
-
-
-
 const locales = { "en-US": require("date-fns/locale/en-US")
 };
 
@@ -80,6 +71,7 @@ window.onclick = function(event) {
     const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
     const [allEvents, setAllEvents] = useState(hardevents);
     const [addEvent, { error }] = useMutation(ADD_EVENT);
+    const [deleteEvent] = useMutation(DELETE_EVENT);
     /// QUERY COURSE ///
   const { loading, data } = useQuery(QUERY_USER);
   const events = data?.user.events;
@@ -104,7 +96,25 @@ window.onclick = function(event) {
           console.error(err);
         }
       }
- 
+
+      async function handleDeleteEvent(e) {
+        console.log(e)
+        try {
+          const data = await deleteEvent({
+            variables: {
+              eventId: e._id
+            },
+            refetchQueries: [
+              {
+                query: QUERY_USER,
+              },
+            ],
+          })
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      
   return (
     <>
     <div className="custom_panels">
@@ -169,6 +179,7 @@ window.onclick = function(event) {
         startAccessor="start"
         events={events}
         endAccessor="end"
+        onSelectEvent={handleDeleteEvent}
         style={{ height: 1000 }}
       />
     </>
