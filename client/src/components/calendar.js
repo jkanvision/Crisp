@@ -16,14 +16,6 @@ import { QUERY_EVENT, QUERY_USER } from "../utils/queries";
 
 
 
-
-
-import './calendar.css';
-import AuthService from '../utils/auth';
-
-
-
-
 const locales = { "en-US": require("date-fns/locale/en-US")
 };
 
@@ -60,6 +52,7 @@ const hardevents = [
     const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
     const [allEvents, setAllEvents] = useState(hardevents);
     const [addEvent, { error }] = useMutation(ADD_EVENT);
+    const [deleteEvent] = useMutation(DELETE_EVENT);
     /// QUERY COURSE ///
   const { loading, data } = useQuery(QUERY_USER);
   const events = data?.user.events;
@@ -80,6 +73,23 @@ const hardevents = [
               ],
           });
           setNewEvent({title: "", start: "", end: "" })
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      async function handleDeleteEvent(e) {
+        console.log(e)
+        try {
+          const data = await deleteEvent({
+            variables: {
+              eventId: e._id
+            },
+            refetchQueries: [
+              {
+                query: QUERY_USER,
+              },
+            ],
+          })
         } catch (err) {
           console.error(err);
         }
@@ -111,6 +121,7 @@ const hardevents = [
         startAccessor="start"
         events={events}
         endAccessor="end"
+        onSelectEvent={handleDeleteEvent}
         style={{ height: 1000 }}
       />
     </>
