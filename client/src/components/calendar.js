@@ -7,7 +7,8 @@ import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDoorOpen, faPlus, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import './calendar.css'
 import AuthService from '../utils/auth'
 import { gql, useMutation, useQuery } from '@apollo/client';
@@ -44,26 +45,55 @@ const hardevents = [
     },
 ];
 
+// function test() {
+//   console.log(document.getElementById('title_test'));
+// }
+
 // Card template html
-function card_temp(title = "") {
+function card_temp(cardTitle = "") {
   return `
   <div class="card">
-    <h3>${title}</h3>
-    <div class="card_inner"></div>
+    <div class="card_title">
+      <input
+        type='text' 
+        value='${cardTitle}'
+      />
+    </div>
+    <div class="card_inner">
+      <textarea placeholder="Add description"></textarea>
+      <button class="card_delete">
+        X
+      </button>
+    </div>
   </div>
   `;
 };
 
+let storeCard = "";
+let storeEvents = [];
+
+window.onresize = function() {
+  if (document.querySelector('.card')) {
+    document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
+  }
+}
+
 // When the user clicks on the button, toggle between hiding and showing the dropdown content
 window.onclick = function(event) {
-  if (event.target.matches('.plusBtn')) {
+  if (event.target.matches('.plusBtn *, .plusBtn')) {
     document.querySelector('.eventDropdown').classList.toggle("show");
   } else if (event.target.matches('.rbc-event-content') && event.target.innerText === "Vacation") {
-    let copy = document.querySelector('[title="Vacation"]');
-    copy.insertAdjacentHTML('afterend', card_temp("Vacation"));
-    document.querySelector('.card').style.width = `${copy.offsetWidth}px`;
+    storeCard = document.querySelector('[title="Vacation"]');
+    storeCard.insertAdjacentHTML('afterend', card_temp("Vacation"));
+    document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
+  } else if (!event.target.matches('.card_title') && !event.target.matches('.card_inner') && !event.target.matches('.card_delete') && !event.target.matches('input') && !event.target.matches('textarea')) {
+    console.log(event.target);
+    if (document.querySelector('.card')) {
+      document.querySelector('.card').style.display = "none";
+    }
+    console.log(storeEvents);
   } else {
-    // document.querySelector('.card').style.display = "none";
+    console.log(event.target);
   }
 }
 
@@ -75,6 +105,7 @@ window.onclick = function(event) {
     /// QUERY COURSE ///
   const { loading, data } = useQuery(QUERY_USER);
   const events = data?.user.events;
+  storeEvents = hardevents;
     console.log(data?.user.events)
     async function handleAddEvent() {
         // setAllEvents([...allEvents, newEvent])
@@ -118,11 +149,13 @@ window.onclick = function(event) {
   return (
     <>
     <div className="custom_panels">
-      <button onClick={AuthService.logout}>Logout</button>
-      <button className="plusBtn">+</button>
+      <div className="buttonPositioning">
+        <button onClick={AuthService.logout} className="logOut"><FontAwesomeIcon icon={faDoorOpen} /></button>
+        <button className="plusBtn"><FontAwesomeIcon icon={faPlus} /></button>
+      </div>
       <div className="eventDropdown">
         <div className="row">
-          <h3>Add Event</h3>
+          <h3>Title</h3>
           <input 
             type='text' 
             placeholder=''
@@ -154,7 +187,7 @@ window.onclick = function(event) {
           onClick={handleAddEvent}
           style={{padding: '10px 10px 5px 10px'}}
         >Add Event</button>
-        <button className="plusBtn">-</button>
+        <button className="plusBtn minusBtn"><FontAwesomeIcon icon={faCaretUp} /></button>
       </div>
     </div>
     {/* <div className="quick_style">

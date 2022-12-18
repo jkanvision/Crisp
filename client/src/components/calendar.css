@@ -195,10 +195,26 @@ button {
 
 /* Event Dropdown panel */
 /* note: needs to be a class in order for the "show" togglable class to work */
+.buttonPositioning {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 20px;
+    top: 16px;
+}
+.buttonPositioning > * {
+    margin: 6px;
+}
+.rbc-calendar {
+    margin-top: 20px;
+}
+.rbc-calendar *:focus {
+    outline: 0;
+}
 .eventDropdown {
     background-color: var(--light);
     top: 0;
-    width: 100%;
+    width: calc(100% - 20px);
     height: 100px;
     padding: 10px;
 
@@ -241,9 +257,29 @@ button {
 .eventDropdown .row:first-child .input {
     width: 350px;
 }
-.eventDropdown > button {
+.custom_panels button {
     border: 3px solid;
     border-color: mintcream var(--bg) var(--bg) mintcream;
+}
+.eventDropdown .minusBtn {
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+}
+.eventDropdown .minusBtn * {
+    background-color: #00000000;
+}
+.plusBtn, .logOut {
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    padding: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    color: var(--dark);
+    font-size: 1.4rem;
+    font-weight: bolder;
 }
 input[type="text" i] {
     padding: 0;
@@ -311,6 +347,24 @@ input[type="text" i] {
     margin: 5px 0;
     color: var(--light);
 }
+.card_title {
+    /* margin-bottom: 10px; */
+}
+.card_title *:focus, .card_inner *:focus, .card_delete *:focus {
+    outline: 0;
+}
+.card_title input {
+    color: var(--light);
+    background-color: #00000000;
+
+    font-size: 1.2rem;
+    font-weight: bolder;
+    text-indent: 0;
+
+    margin-bottom: 5px;
+    border: 0;
+    padding: 0;
+}
 .card_inner {
     height: 100px;
     opacity: 80%;
@@ -319,6 +373,41 @@ input[type="text" i] {
     box-shadow: 0px 0px 0px 8px var(--light);
     background-color: var(--light);
 }
+.card_inner textarea, .card_inner textarea::placeholder {
+    background-color: #00000000;
+    width: 100%;
+    height: 100%;
+
+    color: var(--darker);
+    font-size: 1.1rem;
+    font-weight: lighter;
+    text-indent: 0;
+    text-align: left;
+    resize: none;
+
+    border: 0;
+}
+.card_delete {
+    background-color: #00000000;
+    color: var(--light);
+    width: auto;
+    height: auto;
+
+    position: absolute;
+    right: -30px;
+    bottom: -15px;
+
+    padding: 0;
+    border: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
 .rbc-month-row {
     overflow: visible;
+}
+
+.rbc-toolbar-label {
+    color: var(--darker);
+    font-size: 1.3rem;
+    font-weight: bold;
 }
