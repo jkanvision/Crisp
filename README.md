@@ -25,11 +25,12 @@
   
 
   ![Screenshot of Crisp landing page](client/assets/landing-scrnshot.png)
+  
   &nbsp;
   &nbsp;
 
 
-![Screenshot of Crisp calender page](./public/assets/images/notes-page-scrnshot.png)
+![Screenshot of Crisp calender page](client/assets/calender-scrnshot.png)
   &nbsp;
   &nbsp;
   ## Usage:
