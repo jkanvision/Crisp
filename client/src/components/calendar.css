@@ -9,12 +9,20 @@ body {
     color: var(--darker);
 }
 
+button {
+    cursor: pointer;
+}
+
 .rbc-calendar {
     margin: 0 10%;
 }
 
 .rbc-toolbar {
     margin-bottom: 25px;
+}
+
+.rbc-event.rbc-selected {
+    background-color: var(--highlight_60);
 }
 
 /* MONTH: All border elements */
@@ -72,6 +80,13 @@ body {
 }
 .rbc-toolbar {
     color: var(--dark);
+}
+.rbc-show-more {
+    background-color: #00000000;
+    color: var(--highlight);
+}
+.rbc-show-more:hover, .rbc-show-more:focus {
+    color: var(--highlight_60);
 }
 
 /* MONTH: Styling */
@@ -134,7 +149,6 @@ body {
 .rbc-time-content > * + * > .rbc-timeslot-group:nth-child(24) {
     border-bottom: 2px solid var(--primary_50);
 }
-/* WEEK: Color overwriting */
 
 /* WEEK: Styling */
 /* width */
@@ -177,4 +191,134 @@ body {
 }
 .rbc-agenda-view table.rbc-agenda-table tbody > tr > td + td {
     border: 0;
+}
+
+/* Event Dropdown panel */
+/* note: needs to be a class in order for the "show" togglable class to work */
+.eventDropdown {
+    background-color: var(--light);
+    top: 0;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+
+    display: none;
+    position: absolute;
+    z-index: 5;
+}
+.show { 
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+.eventDropdown * {
+    background-color: var(--primary_50);
+    border: 0;
+}
+.eventDropdown *:focus {
+    outline: 0;
+}
+.eventDropdown > *, .eventDropdown input {
+    border-radius: 5px;
+    margin: 5px;
+    color: var(--dark);
+    font-size: 1.2rem;
+    font-weight: lighter;
+}
+.react-datepicker-wrapper, .react-datepicker-wrapper > * {
+    background-color: #00000000;
+}
+.react-datepicker-wrapper, .react-datepicker-wrapper input {
+    width: 200px;
+    padding: 0;
+}
+.react-datepicker__tab-loop {
+    width: 0;
+    margin: 0;
+    padding: 0;
+}
+.eventDropdown .row:first-child .input {
+    width: 350px;
+}
+.eventDropdown > button {
+    border: 3px solid;
+    border-color: mintcream var(--bg) var(--bg) mintcream;
+}
+input[type="text" i] {
+    padding: 0;
+    padding-top: 5px;
+    text-indent: 10px;
+}
+.col {
+    display: flex;
+    flex-direction: column;
+    background-color: #00000000;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    background-color: #00000000;
+    align-items: center;
+    justify-content: space-between;
+}
+.eventDropdown h3 {
+    background-color: #00000000;
+    margin: 5px 0;
+    margin-top: 10px;
+}
+
+/* Date Picker */
+.react-datepicker-popper, .react-datepicker-popper > div {
+    background-color: #ffffff00;
+}
+.react-datepicker__navigation-icon::before {
+    border-color: var(--dark);
+}
+.react-datepicker__navigation:hover > .react-datepicker__navigation-icon::before {
+    border-color: var(--primary);
+}
+.react-datepicker {
+    background-color: var(--light);
+    color: var(--dark);
+    border: 2px solid var(--dark);
+}
+.react-datepicker * {
+    background-color: var(--light);
+    color: var(--dark);
+}
+.react-datepicker__day--outside-month {
+    color: var(--primary);
+}
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before {
+    top: -2px;
+    border-bottom-color: var(--dark);
+}
+.react-datepicker__triangle::after {
+    border-bottom-color: var(--light);
+}
+
+/* Card pop-up shenanigans */
+.card {
+    display: block;
+    position: absolute;
+    overflow: visible;
+    z-index: 5;
+
+    top: 0;
+}
+.card > h3 {
+    margin: 5px 0;
+    color: var(--light);
+}
+.card_inner {
+    height: 100px;
+    opacity: 80%;
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 0px 0px 0px 8px var(--light);
+    background-color: var(--light);
+}
+.rbc-month-row {
+    overflow: visible;
 }
