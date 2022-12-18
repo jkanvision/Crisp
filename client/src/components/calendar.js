@@ -73,17 +73,17 @@ const events = [
 ];
 
 // Card template html
-function card_temp(title = "") {
-  // events.find(item => item.title === ${title}).title;
+function card_temp(cardTitle = "") {
+  newTitle = events.find(item => item.title === cardTitle).title;
 
   return `
   <div class="card">
     <div class="card_title">
       <input 
         type='text' 
-        placeholder='${title}'
-        value={newEvent.title} 
-        onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+        placeholder='${cardTitle}'
+        value={${cardTitle}} 
+        onChange={(e) => ${newTitle} = e.target.value}
       />
     </div>
     <div class="card_inner">
