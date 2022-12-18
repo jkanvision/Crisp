@@ -74,10 +74,21 @@ const events = [
 
 // Card template html
 function card_temp(title = "") {
+  // events.find(item => item.title === ${title}).title;
+
   return `
   <div class="card">
-    <h3>${title}</h3>
-    <div class="card_inner"></div>
+    <div class="card_title">
+      <input 
+        type='text' 
+        placeholder='${title}'
+        value={newEvent.title} 
+        onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
+      />
+    </div>
+    <div class="card_inner">
+      test
+    </div>
   </div>
   `;
 };
@@ -95,15 +106,22 @@ window.onresize = function() {
 window.onclick = function(event) {
   if (event.target.matches('.plusBtn')) {
     document.querySelector('.eventDropdown').classList.toggle("show");
-  } else if (event.target.matches('.rbc-event-content') && event.target.innerText === "event") {
-    storeCard = document.querySelector('[title="event"]');
-    storeCard.insertAdjacentHTML('afterend', card_temp("event"));
+  } else if (event.target.matches('.rbc-event-content') && event.target.innerText === "Vacation") {
+    storeCard = document.querySelector('[title="Vacation"]');
+    storeCard.insertAdjacentHTML('afterend', card_temp("Vacation"));
     document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
-  } else {
+  } else if (!event.target.matches('.card_title') && !event.target.matches('.card_inner')) {
+    console.log(event.target);
     if (document.querySelector('.card')) {
       document.querySelector('.card').style.display = "none";
     }
     console.log(storeEvents);
+  } else {
+    console.log(event.target);
+    console.log(events.find(item => item.title === "Vacation").title);
+    events.find(item => item.title === "Vacation").title = "vaca";
+    console.log(events);
+    console.log(events.find(item => item.title === "vaca").title);
   }
 }
 
