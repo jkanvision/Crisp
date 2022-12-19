@@ -49,102 +49,123 @@ const hardevents = [
 //   console.log(document.getElementById('title_test'));
 // }
 
-// Card template html
-function card_temp(cardTitle = "") {
-  return `
-  <div class="card">
-    <div class="card_title">
-      <input
-        type='text' 
-        value='${cardTitle}'
-      />
-    </div>
-    <div class="card_inner">
-      <textarea placeholder="Add description"></textarea>
-      <button class="card_delete">
-        X
-      </button>
-    </div>
-  </div>
-  `;
-};
-
-let storeCard = "";
-let storeEvents = [];
-
-window.onresize = function() {
-  if (document.querySelector('.card')) {
-    document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
-  }
-}
-
-// When the user clicks on the button, toggle between hiding and showing the dropdown content
-window.onclick = function(event) {
-  if (event.target.matches('.plusBtn *, .plusBtn')) {
-    document.querySelector('.eventDropdown').classList.toggle("show");
-  } else if (event.target.matches('.rbc-event-content') && event.target.innerText === "Vacation") {
-    storeCard = document.querySelector('[title="Vacation"]');
-    storeCard.insertAdjacentHTML('afterend', card_temp("Vacation"));
-    document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
-  } else if (!event.target.matches('.card_title') && !event.target.matches('.card_inner') && !event.target.matches('.card_delete') && !event.target.matches('input') && !event.target.matches('textarea')) {
-    console.log(event.target);
-    if (document.querySelector('.card')) {
-      document.querySelector('.card').style.display = "none";
-    }
-    console.log(storeEvents);
-  } else {
-    console.log(event.target);
-  }
-}
-
- function CalendarComp() {
-    const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
-    const [allEvents, setAllEvents] = useState(hardevents);
-    const [addEvent, { error }] = useMutation(ADD_EVENT);
-    const [deleteEvent] = useMutation(DELETE_EVENT);
-    /// QUERY COURSE ///
+function CalendarComp() {
+  let storeCard = "";
+  let storeEvents = [];
+  let deleteInfo = "";
+  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
+  const [allEvents, setAllEvents] = useState(hardevents);
+  const [addEvent, { error }] = useMutation(ADD_EVENT);
+  const [deleteEvent] = useMutation(DELETE_EVENT);
+  /// QUERY COURSE ///
   const { loading, data } = useQuery(QUERY_USER);
   const events = data?.user.events;
   storeEvents = hardevents;
-    console.log(data?.user.events)
-    async function handleAddEvent() {
-        // setAllEvents([...allEvents, newEvent])
-        try {
-          const data = await addEvent({
-            variables: {
-               title: newEvent.title,
-               start: newEvent.start, 
-               end: newEvent.end, 
-              },
-              refetchQueries: [
-                {
-                  query: QUERY_USER,
-                },
-              ],
-          });
-          setNewEvent({title: "", start: "", end: "" })
-        } catch (err) {
-          console.error(err);
+  console.log(data?.user.events)
+  deleteInfo = data;
+  async function handleAddEvent() {
+    // setAllEvents([...allEvents, newEvent])
+    try {
+      const data = await addEvent({
+        variables: {
+           title: newEvent.title,
+           start: newEvent.start, 
+           end: newEvent.end, 
+          },
+          refetchQueries: [
+            {
+              query: QUERY_USER,
+            },
+          ],
+      });
+      setNewEvent({title: "", start: "", end: "" })
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // Card template html
+  function card_temp(cardTitle = "") {
+    return `
+    <div class="card">
+      <div class="card_title">
+        <input
+          type='text' 
+          value='${cardTitle}'
+        />
+      </div>
+      <div class="card_inner">
+        <textarea placeholder="Add description"></textarea>
+        <button class="card_delete">
+          X
+        </button>
+      </div>
+    </div>
+    `;
+  };
+
+  window.onresize = function() {
+    if (document.querySelector('.card')) {
+      document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
+    }
+  }
+
+  // When the user clicks on the button, toggle between hiding and showing the dropdown content
+  window.onclick = function(event) {
+    if (event.target.matches('.plusBtn *, .plusBtn')) {
+      document.querySelector('.eventDropdown').classList.toggle("show");
+    } else if (event.target.matches('.rbc-event-content')) {
+      console.log(this._id);
+      if (document.querySelector('.card')) {
+        document.querySelector('.card').outerHTML = "";
+      }
+      // add 'event.target.title' to local storage in a var named 'card_title'
+      localStorage.setItem("card_title", `${event.target.title}`);
+
+      storeCard = event.target;
+      storeCard.insertAdjacentHTML('afterend', card_temp(`${event.target.title}`));
+      document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
+    } else if (event.target.matches('.card_delete')) {
+      DeleteNOW();
+    } else if (!event.target.matches('.card_title') && !event.target.matches('.card_inner') && !event.target.matches('.card_delete') && !event. target.matches('input') && !event.target.matches('textarea')) {
+      console.log(event.target);
+      if (document.querySelector('.card')) {
+        document.querySelector('.card').style.display = "none";
+      }
+      console.log(storeEvents);
+    }
+    console.log(event.target);
+  }
+
+  async function DeleteNOW() {
+    if (deleteInfo !== "") {
+      let dbEvents = deleteInfo?.user.events; // console.log(deleteInfo?.user.events[0]._id);
+      let targetID = "";
+      // get 'card_title' from local storage
+      let localTitle = localStorage.getItem("card_title");
+      // compare local storage title to db title via a for loop
+      for (let i = 0; i < dbEvents.length; i++) {
+        if (dbEvents[i].title === localTitle) {
+          targetID = dbEvents[i]._id;
         }
       }
 
-      async function handleDeleteEvent(e) {
-        console.log(e)
-        try {
-          const data = await deleteEvent({
-            variables: {
-              eventId: e._id
+      try {
+        const data = await deleteEvent({
+          variables: {
+            eventId: targetID
+          },
+          refetchQueries: [
+            {
+              query: QUERY_USER,
             },
-            refetchQueries: [
-              {
-                query: QUERY_USER,
-              },
-            ],
-          })
-        } catch (err) {
-          console.error(err);
-        }
+          ],
+        })
+      } catch (err) {
+        console.error(err);
       }
+    }
+  }
       
   return (
     <>
@@ -190,29 +211,12 @@ window.onclick = function(event) {
         <button className="plusBtn minusBtn"><FontAwesomeIcon icon={faCaretUp} /></button>
       </div>
     </div>
-    {/* <div className="quick_style">
-      <button onClick={AuthService.logout}>Logout</button>
-      <h1>Crisp</h1>
-      <h2>Add New Event</h2>
-      <div>
-        <input type='text' placeholder='Add Event' style={{width: '20%', marginRight: '10px',}}
-        value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
-        />
-        <DatePicker placeholderText='Start Date' style={{marginRight: '10px'}}
-        selected={newEvent.start} onChange={(start) => setNewEvent({...newEvent, start})}
-        />
-        <DatePicker placeholderText='End Date' 
-        selected={newEvent.end} onChange={(end) => setNewEvent({...newEvent, end})}
-        />
-        <button type='text' placeholder='Add Event' style={{marginTop: '10px', height: '20px', width: '5%'}} onClick={handleAddEvent}></button>
-      </div>
-    </div> */}
     <Calendar
         localizer={localizer}
         startAccessor="start"
         events={events}
         endAccessor="end"
-        onSelectEvent={handleDeleteEvent}
+        // onSelectEvent={handleDeleteEvent}
         style={{ height: 1000 }}
       />
     </>
