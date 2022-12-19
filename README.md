@@ -34,7 +34,7 @@
   &nbsp;
   &nbsp;
   ## Usage:
-  To use Crisp, visit: []()
+  To use Crisp, visit: [https://fast-plains-64120.herokuapp.com/](https://fast-plains-64120.herokuapp.com/)
 
   &nbsp;
   &nbsp;
