@@ -52,17 +52,16 @@ const hardevents = [
 function CalendarComp() {
   let storeCard = "";
   let storeEvents = [];
-  let deleteInfo = "";
   const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
   const [allEvents, setAllEvents] = useState(hardevents);
   const [addEvent, { error }] = useMutation(ADD_EVENT);
   const [deleteEvent] = useMutation(DELETE_EVENT);
+  const [updateEvent] = useMutation(UPDATE_EVENT);
   /// QUERY COURSE ///
   const { loading, data } = useQuery(QUERY_USER);
   const events = data?.user.events;
   storeEvents = hardevents;
   console.log(data?.user.events)
-  deleteInfo = data;
   async function handleAddEvent() {
     // setAllEvents([...allEvents, newEvent])
     try {
@@ -91,6 +90,7 @@ function CalendarComp() {
       <div class="card_title">
         <input
           type='text' 
+          id='update_title'
           value='${cardTitle}'
         />
       </div>
@@ -127,6 +127,14 @@ function CalendarComp() {
       document.querySelector('.card').style.width = `${storeCard.offsetWidth}px`;
     } else if (event.target.matches('.card_delete')) {
       DeleteNOW();
+      // delete card
+      if (document.querySelector('.card')) {
+        document.querySelector('.card').outerHTML = "";
+      }
+    // } else if (event.target.matches('#update_title')) {
+    //   if (document.querySelector('#update_title')) {
+    //     console.log(document.querySelector('#update_title').setAttribute("onchange", UpdateNOW()));
+    //   }
     } else if (!event.target.matches('.card_title') && !event.target.matches('.card_inner') && !event.target.matches('.card_delete') && !event. target.matches('input') && !event.target.matches('textarea')) {
       console.log(event.target);
       if (document.querySelector('.card')) {
@@ -138,34 +146,61 @@ function CalendarComp() {
   }
 
   async function DeleteNOW() {
-    if (deleteInfo !== "") {
-      let dbEvents = deleteInfo?.user.events; // console.log(deleteInfo?.user.events[0]._id);
-      let targetID = "";
-      // get 'card_title' from local storage
-      let localTitle = localStorage.getItem("card_title");
-      // compare local storage title to db title via a for loop
-      for (let i = 0; i < dbEvents.length; i++) {
-        if (dbEvents[i].title === localTitle) {
-          targetID = dbEvents[i]._id;
-        }
-      }
-
-      try {
-        const data = await deleteEvent({
-          variables: {
-            eventId: targetID
-          },
-          refetchQueries: [
-            {
-              query: QUERY_USER,
-            },
-          ],
-        })
-      } catch (err) {
-        console.error(err);
+    let dbEvents = data?.user.events;
+    let targetID = "";
+    // get 'card_title' from local storage
+    let localTitle = localStorage.getItem("card_title");
+    // compare local storage title to db title via a for loop
+    for (let i = 0; i < dbEvents.length; i++) {
+      if (dbEvents[i].title === localTitle) {
+        targetID = dbEvents[i]._id;
       }
     }
+
+    try {
+      const data = await deleteEvent({
+        variables: {
+          eventId: targetID
+        },
+        refetchQueries: [
+          {
+            query: QUERY_USER,
+          },
+        ],
+      })
+    } catch (err) {
+      console.error(err);
+    }
   }
+
+  // async function UpdateNOW() {
+  //   let dbEvents = data?.user.events;
+  //   let targetID = "";
+  //   // get 'card_title' from local storage
+  //   let localTitle = localStorage.getItem("card_title");
+  //   // compare local storage title to db title via a for loop
+  //   for (let i = 0; i < dbEvents.length; i++) {
+  //     if (dbEvents[i].title === localTitle) {
+  //       targetID = dbEvents[i]._id;
+  //     }
+  //   }
+  //   var updateTitle = document.getElementById("update_title");
+
+  //   try {
+  //     const data = await updateEvent({
+  //       variables: {
+  //         eventId: targetID
+  //       },
+  //       refetchQueries: [
+  //         {
+  //           query: QUERY_USER,
+  //         },
+  //       ],
+  //     })
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
       
   return (
     <>
